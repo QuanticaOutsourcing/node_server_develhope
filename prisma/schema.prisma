@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  image_url String
+  publisher String
+  published Boolean
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  // INT => 1
+  // FLOAT => 0.12f
+  // DOUBLE => 0.3248923439284
+  createdAt DateTime @default(now()) // 2019-11-01Z09:12:13T
+  updatedAt DateTime @updatedAt
+  title     String   @db.VarChar(255) //STRINGA CON LUNGHEZZA DI 255(MAX)
+  content   String @db.Text // TEXT E' UNA STRINGA CON MAX 100.000
+  thumbnail_url String // String => VARCHAR(196)
+  published Boolean  @default(true) // true || false
+}
